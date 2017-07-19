@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+    <!--mybatis…………………………………………start-->
+
+    <!--引入配置资源文件-->
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="location" value="classpath:db.properties"/>
+    </bean>
+    <!-- 1. 数据源 : dbcp -->
+    <!--若是换成 druid 则使用 com.alibaba.druid.pool.DruidDataSource-->
+    <!--若是换成 druid 则使用 org.apache.commons.dbcp.BasicDataSource-->
+    <bean id="datasource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${driverClassName}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+        <property name="initialSize" value="${initialSize}"/>
+        <property name="maxActive" value="${maxActive}"/>
+        <property name="maxIdle" value="${maxIdle}"/>
+        <property name="minIdle" value="${minIdle}"/>
+    </bean>
+    <!--
+        2. mybatis的SqlSession的工厂: SqlSessionFactoryBean
+            dataSource / typeAliasesPackage
+    -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="datasource"/>
+        <property name="typeAliasesPackage" value="cn.wean2016.domain"/>
+
+        <!--添加 MyBatis 配置文件-->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
+
+    <!-- mapper扫描器，扫描包的路径，如果需要扫描多个包，中间需要用半角逗号符分开 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="cn.wean2016.mapper"/>
+        <property name="SqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+
+    <!--
+        3. mybatis自动扫描加载Sql映射文件 : MapperScannerConfigurer
+            sqlSessionFactory / basePackage
+    -->
+    <!--<bean id="config"  class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+        <!--<property name="basePackage" value="cn.wean2016.mapper" />-->
+        <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
+    <!--</bean>-->
+
+
+    <!-- 4. 事务管理 : DataSourceTransactionManager -->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="datasource"/>
+    </bean>
+
+    <!-- 5. 使用声明式事务 -->
+    <tx:annotation-driven transaction-manager="txManager"/>
+
+    <!--配置接口 bean -->
+    <!--<bean id="studentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.wean2016.mapper.StudentMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+-->
+
+    <!--mybatis…………………………………………finish-->
+
+    <!--配置 springmvc…………………………………………start-->
+    <!--springmvc 扫描 controller 注解，其余的由 spring IOC 扫描-->
+    <context:component-scan base-package="cn.wean2016">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    </context:component-scan>
+
+
+
+</beans>
