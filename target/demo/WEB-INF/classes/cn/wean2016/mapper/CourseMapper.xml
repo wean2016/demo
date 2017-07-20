@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.wean2016.mapper.CourseMapper">
+
+    <insert id="addCourse" parameterType="Course">
+        INSERT INTO course(teacherId, courseId, term, courseName, courseCredits)
+        VALUES (#{teacher.teacherId}, #{courseId}, #{term}, #{courseName}, #{courseCredits})
+    </insert>
+
+    <update id="updateCourse" parameterType="Course">
+        UPDATE course SET teacherId=#{teacher.teacherId}, term=#{term}, courseName=#{courseName},
+        courseCredits=#{courseCredits} WHERE courseId=#{courseId}
+    </update>
+
+    <delete id="deleteCourse" parameterType="string">
+        DELETE FROM course WHERE courseId=#{courseId}
+    </delete>
+
+    <select id="getCourseById" parameterType="string" resultMap="getCourseByIdMap">
+        SELECT * FROM course WHERE courseId=#{courseId}
+    </select>
+
+    <select id="getTeacher" parameterType="string" resultType="Teacher">
+        SELECT * FROM teacher WHERE teacherId=#{teacherId}
+    </select>
+
+    <resultMap id="getCourseByIdMap" type="Course">
+        <association property="teacher" column="teacherId" select="getTeacher"/>
+    </resultMap>
+
+    <select id="getAllCourse" resultMap="getAllCourseMap">
+        SELECT * FROM course
+    </select>
+
+    <resultMap id="getAllCourseMap" type="Course">
+        <association property="teacher" column="teacherId" select="getTeacher"/>
+    </resultMap>
+
+</mapper>

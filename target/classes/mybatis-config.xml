@@ -15,8 +15,8 @@
         <package name="cn.wean2016.mapper"/>
     </typeAliases>
 
-    <mappers>
-    <!--<mapper resource="cn/wean2016/mapper/StudentMapper.xml"/>-->
-    <mapper class="cn.wean2016.mapper.StudentMapper"/>
-    </mappers>
+    <!--<mappers>-->
+    <!--&lt;!&ndash;<mapper resource="cn/wean2016/mapper/StudentMapper.xml"/>&ndash;&gt;-->
+    <!--<mapper class="cn.wean2016.mapper.StudentMapper"/>-->
+    <!--</mappers>-->
 </configuration>

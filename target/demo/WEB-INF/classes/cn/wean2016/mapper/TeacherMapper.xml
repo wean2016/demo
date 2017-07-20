@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.wean2016.mapper.TeacherMapper">
+
+    <insert id="addTeacher" parameterType="Teacher">
+        INSERT INTO teacher(teacherId, teacherName, teacherGender, teacherPassword, teacherAvatar)
+        VALUES (#{teacherId}, #{teacherName}, #{teacherGender}, #{teacherPassword}, #{teacherAvatar})
+    </insert>
+
+    <update id="updateTeacher" parameterType="Teacher">
+        UPDATE teacher SET teacherName=#{teacherName}, teacherGender=#{teacherGender}, teacherPassword=#{teacherPassword},
+        teacherAvatar=#{teacherAvatar} WHERE teacherId=#{teacherId}
+    </update>
+
+    <delete id="deleteTeacher" parameterType="string">
+        DELETE FROM teacher WHERE teacherId=#{teacherId}
+    </delete>
+
+    <select id="getTeacherById" parameterType="string" resultMap="getTeacherByIdMap">
+        SELECT * FROM teacher WHERE teacherId=#{teacherId}
+    </select>
+
+    <select id="getCourse" parameterType="string" resultType="Course">
+        SELECT * FROM course WHERE teacherId=#{teacherId}
+    </select>
+
+    <resultMap id="getTeacherByIdMap" type="Teacher">
+        <id property="teacherId" column="teacherId"/>
+        <collection property="courses" column="teacherId" select="getCourse"/>
+    </resultMap>
+    
+    <select id="getAllTeacher" resultMap="getAllTeacherMap">
+        SELECT * FROM teacher
+    </select>
+
+    <resultMap id="getAllTeacherMap" type="Teacher">
+        <id property="teacherId" column="teacherId"/>
+        <collection property="courses" column="teacherId" select="getCourse"/>
+    </resultMap>
+</mapper>

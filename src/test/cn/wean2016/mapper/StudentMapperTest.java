@@ -20,29 +20,32 @@ public class StudentMapperTest {
 
     @Test
     public void testAddStudent(){
-        mapper.addStudent(new Student("3116005180", "刘跃群", 0, "ASDFGHJKL", "test", null));
+        mapper.addStudent(new Student("3116005180", "刘跃群", 0, "ASDFGHJKL", "test"));
     }
 
 
     @Test
     public void testGetStudentById(){
-        System.out.println(mapper.getStudentById("3116005189"));
+        Student student = mapper.getStudentById("3116005189");
+        System.out.println(student);
     }
-//
-//    @Test
-//    public void testGetAllStudent(){
-//        System.out.println(mapper.getAllStudent());
-//    }
-//
-//    @Test
-//    public void testUpdateStudent(){
-//        Student student = mapper.getStudentById(1);
-//        student.setStudentName("papa");
-//        mapper.updateStudent(student);
-//    }
-//
-//    @Test
-//    public void testDeleteStudent(){
-//        mapper.deleteStudent(2);
-//    }
+
+    @Test
+    public void testGetAllStudent(){
+        System.out.println(mapper.getAllStudent());
+    }
+
+    @Test
+    public void testUpdateStudent(){
+        Student student = mapper.getStudentById("3116005189");
+        student.setStudentName("pap");
+        int result = mapper.updateStudentInformation(student);
+        System.out.println(result);
+    }
+
+    @Test
+    public void testDeleteStudent(){
+        int result = mapper.deleteStudent("3116005180");
+        System.out.println(result);
+    }
 }

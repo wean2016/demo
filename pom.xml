@@ -191,8 +191,24 @@
             <version>RELEASE</version>
         </dependency>
         <!--数据库-finish-->
+
     </dependencies>
     <build>
         <finalName>demo</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <!--设置编译时使用的 JDK 版本-->
+                    <source>1.8</source>
+                    <!--设置运行时使用的 JDK 版本-->
+                    <target>1.8</target>
+                    <!--设置为 true 则跳过测试-->
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>

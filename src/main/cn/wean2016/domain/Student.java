@@ -14,18 +14,16 @@ public class Student implements Serializable{
     private Integer studentGender;      // 0 代表男生， 1 代表女生
     private String studentPassword;
     private String studentAvatar;
-    private List<Course> courses;
 
     public Student() {
     }
 
-    public Student(String studentId, String studentName, Integer studentGender, String studentPassword, String studentAvatar, List<Course> courses) {
+    public Student(String studentId, String studentName, Integer studentGender, String studentPassword, String studentAvatar) {
         this.studentId = studentId;
         this.studentName = studentName;
         this.studentGender = studentGender;
         this.studentPassword = studentPassword;
         this.studentAvatar = studentAvatar;
-        this.courses = courses;
     }
 
     public String getStudentId() {
@@ -73,24 +71,14 @@ public class Student implements Serializable{
         return this;
     }
 
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public Student setCourses(List<Course> courses) {
-        this.courses = courses;
-        return this;
-    }
-
     @Override
     public String toString() {
         return "Student{" +
-                "studentId=" + studentId +
+                "studentId='" + studentId + '\'' +
                 ", studentName='" + studentName + '\'' +
                 ", studentGender=" + studentGender +
                 ", studentPassword='" + studentPassword + '\'' +
                 ", studentAvatar='" + studentAvatar + '\'' +
-                ", courses=" + courses +
                 '}';
     }
 }

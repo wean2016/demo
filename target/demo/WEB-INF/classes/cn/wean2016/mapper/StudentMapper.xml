@@ -4,23 +4,24 @@
 
 <mapper namespace="cn.wean2016.mapper.StudentMapper">
 
-    <select id="getStudentById" parameterType="int" resultType="Student">
-        SELECT * FROM student WHERE id=#{id}
+    <select id="getStudentById" parameterType="string" resultType="Student">
+        SELECT * FROM student WHERE studentId = #{id}
     </select>
+
 
     <select id="getAllStudent" resultType="Student">
         SELECT * FROM student
     </select>
 
     <insert id="addStudent" parameterType="Student">
-        INSERT INTO student(id, studentName, studentGender) VALUES (#{id}, #{studentName}, #{studentGender})
+        INSERT INTO student(studentId, studentName, studentGender, studentPassword, studentAvatar) VALUES (#{studentId}, #{studentName}, #{studentGender}, #{studentPassword}, #{studentAvatar})
     </insert>
 
-    <update id="updateStudent" parameterType="Student">
-        UPDATE student SET studentName=#{studentName}, studentGender=#{studentGender} WHERE id=#{id}
+    <update id="updateStudentInformation" parameterType="Student">
+        UPDATE student SET studentName=#{studentName}, studentGender=#{studentGender}, studentPassword=#{studentPassword}, studentAvatar=#{studentAvatar} WHERE studentId=#{studentId}
     </update>
 
-    <delete id="deleteStudent" parameterType="int">
-        DELETE FROM student WHERE id=#{id}
+    <delete id="deleteStudent" parameterType="string">
+        DELETE FROM student WHERE studentId=#{id}
     </delete>
 </mapper>

@@ -4,27 +4,10 @@
 
 <mapper namespace="cn.wean2016.mapper.StudentMapper">
 
-    <select id="getStudentById" parameterType="string" resultMap="getStudentByIdMap">
-        SELECT * FROM student INNER JOIN course ON course.studentId = student.studentId
-        WHERE student.studentId = #{id}
+    <select id="getStudentById" parameterType="string" resultType="Student">
+        SELECT * FROM student WHERE studentId = #{id}
     </select>
 
-    <resultMap id="getStudentByIdMap" type="Student">
-        <id property="studentId" column="student.studentId"/>
-        <result property="studentName"/>
-        <result property="studentGender"/>
-        <result property="studentPassword"/>
-        <result property="studentAvatar"/>
-        <collection property="courses" ofType="Course">
-            <id property="studentId" column="course.studentId"/>
-            <id property="courseId"/>
-            <result property="teacherId"/>
-            <result property="term"/>
-            <result property="courseName"/>
-            <result property="courseCredits"/>
-            <result property="courseGrade"/>
-        </collection>
-    </resultMap>
 
     <select id="getAllStudent" resultType="Student">
         SELECT * FROM student
@@ -34,11 +17,11 @@
         INSERT INTO student(studentId, studentName, studentGender, studentPassword, studentAvatar) VALUES (#{studentId}, #{studentName}, #{studentGender}, #{studentPassword}, #{studentAvatar})
     </insert>
 
-    <update id="updateStudent" parameterType="Student">
+    <update id="updateStudentInformation" parameterType="Student">
         UPDATE student SET studentName=#{studentName}, studentGender=#{studentGender}, studentPassword=#{studentPassword}, studentAvatar=#{studentAvatar} WHERE studentId=#{studentId}
     </update>
 
-    <delete id="deleteStudent" parameterType="int">
-        DELETE FROM student WHERE id=#{id}
+    <delete id="deleteStudent" parameterType="string">
+        DELETE FROM student WHERE studentId=#{id}
     </delete>
 </mapper>

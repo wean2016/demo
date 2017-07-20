@@ -4,42 +4,29 @@ package cn.wean2016.domain;
  * Created by hasee on 2017/7/19.
  */
 public class Course {
-    private String studentId;
-    private String teacherId;
+    private Teacher teacher;
     private String courseId;
     private String term;
     private String courseName;
     private double courseCredits;
-    private double courseGrade;
 
     public Course() {
     }
 
-    public Course(String studentId, String teacherId, String courseId, String term, String courseName, double courseCredits, double courseGrade) {
-        this.studentId = studentId;
-        this.teacherId = teacherId;
+    public Course(Teacher teacher, String courseId, String term, String courseName, double courseCredits) {
+        this.teacher = teacher;
         this.courseId = courseId;
         this.term = term;
         this.courseName = courseName;
         this.courseCredits = courseCredits;
-        this.courseGrade = courseGrade;
     }
 
-    public String getStudentId() {
-        return studentId;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public Course setStudentId(String studentId) {
-        this.studentId = studentId;
-        return this;
-    }
-
-    public String getTeacherId() {
-        return teacherId;
-    }
-
-    public Course setTeacherId(String teacherId) {
-        this.teacherId = teacherId;
+    public Course setTeacher(Teacher teacher) {
+        this.teacher = teacher;
         return this;
     }
 
@@ -79,26 +66,14 @@ public class Course {
         return this;
     }
 
-    public double getCourseGrade() {
-        return courseGrade;
-    }
-
-    public Course setCourseGrade(double courseGrade) {
-        this.courseGrade = courseGrade;
-        return this;
-    }
-
-
     @Override
     public String toString() {
         return "Course{" +
-                "studentId='" + studentId + '\'' +
-                ", teacherId='" + teacherId + '\'' +
+                "teacher=" + teacher +
                 ", courseId='" + courseId + '\'' +
                 ", term='" + term + '\'' +
                 ", courseName='" + courseName + '\'' +
                 ", courseCredits=" + courseCredits +
-                ", courseGrade=" + courseGrade +
                 '}';
     }
 }
