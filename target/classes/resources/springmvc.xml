@@ -3,9 +3,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
     <!--
         问题： 若 Spirng 的 IOC 容器扫描的包有重合的部分，就会导致有的 bean 会被创建两次
@@ -37,4 +40,26 @@
         <property name="maxUploadSize" value="1024000"/>
     </bean>
 
+
+    <!--注册切面 bean -->
+    <bean class="cn.wean2016.aspect.LoginAspect" id="loginAspect"/>
+    <!--xml 配置切面-->
+    <aop:config>
+        <aop:pointcut id="studentLoginPointCut" expression="execution(* cn.wean2016.handlers.LoginHandler.studentSignIn(*,*,*,*))"/>
+        <aop:pointcut id="teacherLoginPointCut" expression="execution(* cn.wean2016.handlers.LoginHandler.teacherSignIn(*,*,*,*))"/>
+
+        <aop:aspect ref="loginAspect">
+            <aop:around method="studentLoginAroundAdvice" pointcut-ref="studentLoginPointCut"/>
+            <aop:around method="teacherLoginAroundAdvice" pointcut-ref="teacherLoginPointCut"/>
+        </aop:aspect>
+    </aop:config>
+
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <!--配置拦截器作用或者不作用的区域和拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/student/*"/>
+            <bean class="cn.wean2016.interceptor.LoginStatusInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

@@ -1,5 +1,6 @@
 package cn.wean2016.domain;
 
+import javax.validation.constraints.Pattern;
 import java.util.Arrays;
 import java.util.List;
 
@@ -7,9 +8,11 @@ import java.util.List;
  * Created by hasee on 2017/7/19.
  */
 public class Teacher {
+    @Pattern(regexp = "teacher\\d{3}", message = "账号格式错误！")
     private String teacherId;
     private String teacherName;
     private Integer teacherGender;
+    @Pattern(regexp = "\\w{6,10}", message = "密码格式错误！")
     private String teacherPassword;
     private String teacherAvatar;
     private List<Course> courses;

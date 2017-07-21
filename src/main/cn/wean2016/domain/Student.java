@@ -1,5 +1,11 @@
 package cn.wean2016.domain;
 
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
@@ -9,9 +15,16 @@ import java.util.List;
  */
 public class Student implements Serializable{
 
+    @Pattern(regexp = "\\d{10}", message = "学号是 10 个数字！")       // 学号长度是 11 个数字
     private String studentId;
+
+    @Pattern(regexp = "[\u4E00-\u9FA5]{2,3}", message = "姓名是两到三个汉字")     // 姓名是两到三个汉字
     private String studentName;
+
+    @Range(min = 0, max = 1, message = "请选择性别！")
+    @NotNull(message = "请选择性别！")
     private Integer studentGender;      // 0 代表男生， 1 代表女生
+    @Pattern(regexp = "\\w{6,10}", message = "密码是 6 到 10 个字符（数字字母下划线）")
     private String studentPassword;
     private String studentAvatar;
 

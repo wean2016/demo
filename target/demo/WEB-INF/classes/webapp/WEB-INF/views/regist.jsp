@@ -23,14 +23,22 @@
 </head>
 
 <body>
-<form action="/regist" method="post" enctype="multipart/form-data">
-    学号：<input type="text" name="studentId"> <br>
-    姓名：<input type="text" name="studentName"> <br>
-    性别：<input type="radio" name="studentGender" value="0">男 &nbsp;
-         <input type="radio" name="studentGender" value="1">女 <br>
-    密码：<input type="password" name="studentPassword"> <br>
+<form:form action="/regist" method="post" enctype="multipart/form-data" modelAttribute="student">
+    学号：<form:input path="studentId" />
+        <form:errors path="studentId"/>
+        <br>
+    姓名：<form:input path="studentName"/>
+        <form:errors path="studentName"/>
+        <br>
+    性别：<form:radiobutton path="studentGender" value="0" />男 &nbsp;
+        <form:radiobutton path="studentGender" value="1"/>女
+        <form:errors path="studentGender"/>
+        <br>
+    密码：<form:password path="studentPassword"/>
+        <form:errors path="studentPassword"/>
+        <br>
     头像：<input type="file" name="avatar"> <br>
     <input type="submit" value="注册">
-</form>
+</form:form>
 </body>
 </html>

@@ -22,6 +22,8 @@
 </head>
 
 <body>
-学生主页
+<h1>学生主页</h1>
+<hr>
+<a href="/student/information">查看/修改个人信息</a>
 </body>
 </html>

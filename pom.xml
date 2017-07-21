@@ -80,6 +80,18 @@
             <version>${spring.version}</version>
         </dependency>
         <!--spring-stop-->
+        <!--配置切面注解支持-->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>LATEST</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.6.8.RELEASE</version>
+        </dependency>
+        <!--配置切面注解支持-finish-->
         <!--servlet-->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -112,17 +124,17 @@
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
-            <version>1.1.0.CR1</version>
+            <version>1.0.0.GA</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator-annotation-processor</artifactId>
-            <version>5.0.0.CR2</version>
+            <version>4.2.0.Final</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>5.0.0.CR2</version>
+            <version>4.2.0.Final</version>
         </dependency>
         <!--数值校验-stop-->
         <!--JSON-->
