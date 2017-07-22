@@ -1,9 +1,11 @@
 package cn.wean2016.handlers;
 
+import cn.wean2016.constant.Constant;
 import cn.wean2016.domain.Student;
 import cn.wean2016.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -61,13 +63,23 @@ public class StudentHandler {
 
         studentService.updateStudentInformation(student);
 
-        return "forward:/student/information";
+        return "redirect:/student/information";
     }
 
     @RequestMapping(value = "/information",method = RequestMethod.POST)
-    public String updateInformation(@Valid Student student){
+    public String updateInformation(@Valid Student student, Errors result, Map<String, Object> map){
+        if (result.getErrorCount() > 0){
+            return "/student/information";
+        }
+
         studentService.updateStudentInformation(student);
-        return "forward:/student/information";
+        map.put("updateStatus", Constant.UPDATE_SUCCESSFUL);
+        return "/student/information";
+    }
+
+    @RequestMapping("main")
+    public String main(){
+        return "/student/main";
     }
 
 }

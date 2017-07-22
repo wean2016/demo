@@ -22,6 +22,8 @@
 </head>
 
 <body>
-教师主页
+<h1>教师主页</h1>
+<hr>
+<a href="">课程</a>
 </body>
 </html>

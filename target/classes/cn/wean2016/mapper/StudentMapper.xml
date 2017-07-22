@@ -24,4 +24,19 @@
     <delete id="deleteStudent" parameterType="string">
         DELETE FROM student WHERE studentId=#{id}
     </delete>
+    
+    <select id="getStudentByCondition"  resultType="Student">
+        SELECT * FROM student t WHERE 1=1
+        <if test="studentModel.studentId != null ">
+            AND t.studentId LIKE #{studentModel.studentId}
+        </if>
+        <if test="studentModel.studentName != null">
+            AND t.studentName LIKE #{studentModel.studentName}
+        </if>
+        <if test="studentModel.studentGender != null">
+            AND t.studentGender = #{studentModel.studentGender}
+        </if>
+        limit #{fromIndex} , #{pageSize}
+    </select>
+    
 </mapper>

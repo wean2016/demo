@@ -12,4 +12,10 @@ public class Constant {
 
     public static final String STUDENT_STATUS_IN_SESSION = "student";
     public static final String TEACHER_STATUS_IN_SESSION = "teacher";
+
+    public static final String UPDATE_SUCCESSFUL= "修改成功！";
+
+    public static final int ADD_COURSE_SUCCESSFUL = 1;
+
+    public static final int ADD_COURSE_FAIL = 0;
 }

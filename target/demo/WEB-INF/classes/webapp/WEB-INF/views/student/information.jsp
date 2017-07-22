@@ -39,7 +39,9 @@
     <form:input path="studentGender"/>
     <form:errors path="studentGender"/>
     <br>
-    <input type="submit" value="登陆">
+    <input type="submit" value="修改">
+    <br>
+    ${updateStatus}
 </form:form>
 </body>
 </html>

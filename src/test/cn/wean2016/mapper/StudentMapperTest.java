@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * Created by hasee on 2017/7/19.
  */
@@ -47,5 +50,21 @@ public class StudentMapperTest {
     public void testDeleteStudent(){
         int result = mapper.deleteStudent("3116005180");
         System.out.println(result);
+    }
+
+    @Test
+    public void testGetStudentByCondition(){
+        Student studentModel = new Student();
+//        studentModel.setStudentId("3116005189");
+//        studentModel.setStudentName("%小%");
+//        studentModel.setStudentGender(0);
+        Integer pageSize = 2;
+        Integer fromIndex= 1;
+
+        List<Student> result = mapper.getStudentByCondition(studentModel, fromIndex, pageSize);
+        Iterator<Student> it = result.iterator();
+        while (it.hasNext()){
+            System.out.println(it.next());
+        }
     }
 }

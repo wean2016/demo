@@ -2,6 +2,7 @@ package cn.wean2016.mapper;
 
 import cn.wean2016.domain.Student;
 import javafx.scene.media.VideoTrack;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -19,5 +20,8 @@ public interface StudentMapper {
     public int updateStudentInformation(Student student);
     public int addStudent(Student student);
     public int deleteStudent(String id);
+
+    public List<Student> getStudentByCondition(@Param("studentModel") Student studentModel, @Param("fromIndex") int fromIndex, @Param("pageSize") int pageSize);
+    public int getStudentCountByCondition(@Param("studentModel") Student studentModel);
 
 }

@@ -59,7 +59,11 @@
         <!--配置拦截器作用或者不作用的区域和拦截器-->
         <mvc:interceptor>
             <mvc:mapping path="/student/*"/>
-            <bean class="cn.wean2016.interceptor.LoginStatusInterceptor"/>
+            <bean class="cn.wean2016.interceptor.StudentLoginStatusInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/teacher/*"/>
+            <bean class="cn.wean2016.interceptor.TeacherLoginStatusInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 </beans>
